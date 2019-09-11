@@ -10,35 +10,38 @@ class App extends React.Component {
   constructor() {
     super()
     this.state = {
-      statInfo: [
-        {
-          id: 1,
-          type: 'Happiness',
-          level: 50
-        },
-
-        {
-          id: 2,
-          type: 'Hunger',
-          level: 50
-        },
-
-        {
-          id: 3,
-          type: 'Enery',
-          level: 50
+          happiness: 50,
+          fullness: 50,
+          energy: 50
         }
-      ]
     }
+
+  handleSleep = () => {
+    const updateEnergy = this.state.energy + 4;
+    this.setState(
+      {energy: updateEnergy}
+    )
   }
 
-
-  // handleUpdateStats ()
+  // happiness: 1,
+  // fullness: -2,
+  // energy: 4
   //   create a map of the array "this.state"
   //   get the numbers from buttonInfo.statMod.fullness.
   //   mathching key's value with the new number(based on button push).
   //   save new array(map) as this.state
 
+  // handleFeed()
+  //   create a map of the array "this.state"
+  //   get the numbers from buttonInfo.statMod.fullness.
+  //   mathching key's value with the new number(based on button push).
+  //   save new array(map) as this.state
+
+  // handlePlay()
+  //   create a map of the array "this.state"
+  //   get the numbers from buttonInfo.statMod.fullness.
+  //   mathching key's value with the new number(based on button push).
+  //   save new array(map) as this.state
 
 
 
@@ -58,13 +61,13 @@ class App extends React.Component {
           </Col>
 
           <Col md={4} className='frame'>
-            <StatContainer statInfo={this.state.statInfo} />
+            <StatContainer statInfo={this.state} />
           </Col>
         </Row>
 
         <Row>
           <Col md={12} className='frame'>
-            <ButtonContainer />
+            <ButtonContainer onSleep={this.handleSleep} onFeed={this.handleFeed} onPlay={this.handlePlay}/>
           </Col>
         </Row>
       </Container>

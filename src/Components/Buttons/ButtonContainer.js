@@ -1,10 +1,12 @@
 import React from 'react';
-import Button from './Button';
 import feedIcon from '../../img/feedIcon.png';
 import sleepIcon from '../../img/sleepIcon.png';
 import playIcon from '../../img/playIcon.png';
+import FeedButton from './FeedButton';
+import PlayButton from './PlayButton';
+import SleepButton from './SleepButton';
 
-function ButtonContainer() {
+function ButtonContainer(props) {
   const buttonInfo = [
     {
       id: 1,
@@ -40,11 +42,12 @@ function ButtonContainer() {
     }
   ]
 
-  const buttonList = buttonInfo.map(button => <Button key={button.id} button = {button}/>);
 
   return (
     <div className='buttonDiv'>
-      {buttonList}
+      <FeedButton onFeed={props.onFeed} />
+      <PlayButton onPlay={props.onPlay} />
+      <SleepButton onSleep={props.onSleep} />
     </div>
   )
 }
