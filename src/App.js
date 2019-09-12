@@ -10,69 +10,94 @@ class App extends React.Component {
   constructor() {
     super()
     this.state = {
-          happiness: 50,
-          fullness: 50,
-          energy: 50
-        }
+      happiness: 50,
+      fullness: 50,
+      energy: 50
     }
-
-  handleSleep = () => {
-    const updateEnergy = this.state.energy + 4;
-    this.setState(
-      {energy: updateEnergy}
-    )
   }
 
-  // happiness: 1,
-  // fullness: -2,
-  // energy: 4
-  //   create a map of the array "this.state"
-  //   get the numbers from buttonInfo.statMod.fullness.
-  //   mathching key's value with the new number(based on button push).
-  //   save new array(map) as this.state
+  componentDidMount() {
+    this.waitTimeUpdateTimer = setInterval(() =>
+    this.updateStatsByTime(),
+    3000
+  )
+}
 
-  // handleFeed()
-  //   create a map of the array "this.state"
-  //   get the numbers from buttonInfo.statMod.fullness.
-  //   mathching key's value with the new number(based on button push).
-  //   save new array(map) as this.state
+updateStatsByTime = () => {
+  const updateEnergy = this.state.energy -1;
+  const updateHappiness = this.state.happiness -1;
+  const updateFullness = this.state.fullness -1;
+  this.setState(
+    {energy: updateEnergy,
+      happiness: updateHappiness,
+      fullness: updateFullness
+    }
+  )
+}
 
-  // handlePlay()
-  //   create a map of the array "this.state"
-  //   get the numbers from buttonInfo.statMod.fullness.
-  //   mathching key's value with the new number(based on button push).
-  //   save new array(map) as this.state
+handleSleep = () => {
+  const updateEnergy = this.state.energy +4;
+  const updateHappiness = this.state.happiness +1;
+  const updateFullness = this.state.fullness -2;
+  this.setState(
+    {energy: updateEnergy,
+      happiness: updateHappiness,
+      fullness: updateFullness
+    }
+  )
+}
 
+handleFeed = () => {
+  const updateEnergy = this.state.energy +2;
+  const updateHappiness = this.state.happiness +2;
+  const updateFullness = this.state.fullness +4;
+  this.setState(
+    {energy: updateEnergy,
+      happiness: updateHappiness,
+      fullness: updateFullness
+    }
+  )
+}
 
+handlePlay = () => {
+  const updateEnergy = this.state.energy -3;
+  const updateHappiness = this.state.happiness +4;
+  const updateFullness = this.state.fullness -2;
+  this.setState(
+    {energy: updateEnergy,
+      happiness: updateHappiness,
+      fullness: updateFullness
+    }
+  )
+}
 
+render() {
+  return (
+    <Container className='ourContainer frame'>
+    <Row>
+    <Col md={12} className='frame top' >
+    <Header className='header' />
+    </Col>
+    </Row>
 
-  render() {
-    return (
-      <Container className='ourContainer frame'>
-        <Row>
-          <Col md={12} className='frame' >
-            <Header className='header' />
-          </Col>
-        </Row>
+    <Row>
+    <Col md={8} className='frame left'>
+    <Display />
+    </Col>
 
-        <Row>
-          <Col md={8} className='frame'>
-            <Display />
-          </Col>
+    <Col md={4} className='frame right'>
+    <StatContainer statInfo={this.state} />
+    </Col>
+    </Row>
 
-          <Col md={4} className='frame'>
-            <StatContainer statInfo={this.state} />
-          </Col>
-        </Row>
-
-        <Row>
-          <Col md={12} className='frame'>
-            <ButtonContainer onSleep={this.handleSleep} onFeed={this.handleFeed} onPlay={this.handlePlay}/>
-          </Col>
-        </Row>
-      </Container>
-    );
-  }
+    <Row>
+    <Col md={12} className='frame bottom'>
+    <ButtonContainer onSleep={this.handleSleep} onFeed={this.handleFeed} onPlay={this.handlePlay}/>
+    </Col>
+    </Row>
+    </Container>
+  );
+}
 }
 
 export default App;
