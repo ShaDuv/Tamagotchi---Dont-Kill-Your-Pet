@@ -1,11 +1,10 @@
 import React from 'react';
-import bunnyBooty from '../../img/bunnyBooty.png'
 import css from './Styles.css'
 
-function Display () {
+function Display (props) {
   return (
     <div>
-      <img src={bunnyBooty} />
+      <img src={props.display} />
     </div>
   )
 }

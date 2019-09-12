@@ -3,8 +3,12 @@ import { Container, Row, Col } from 'react-bootstrap';
 import './App.css';
 import ButtonContainer from './Components/Buttons/ButtonContainer';
 import StatContainer from './Components/Stats/StatContainer';
-import Header from './Components/Header/Header'
-import Display from './Components/Display/Display'
+import Header from './Components/Header/Header';
+import Display from './Components/Display/Display';
+import bunnyBooty from './img/bunnyBooty.png';
+import bunnySleep from './img/bunnySleep.png';
+import bunnyEat from './img/bunnyEat.png';
+import bunnyPlay from './img/bunnyPlay.png';
 
 class App extends React.Component {
   constructor() {
@@ -12,7 +16,8 @@ class App extends React.Component {
     this.state = {
       happiness: 50,
       fullness: 50,
-      energy: 50
+      energy: 50,
+      display: bunnyBooty
     }
   }
 
@@ -20,7 +25,7 @@ class App extends React.Component {
     this.waitTimeUpdateTimer = setInterval(() =>
     this.updateStatsByTime(),
     3000
-  )
+  );
 }
 
 updateStatsByTime = () => {
@@ -28,11 +33,12 @@ updateStatsByTime = () => {
   const updateHappiness = this.state.happiness -1;
   const updateFullness = this.state.fullness -1;
   this.setState(
-    {energy: updateEnergy,
+    {
+      energy: updateEnergy,
       happiness: updateHappiness,
       fullness: updateFullness
     }
-  )
+  );
 }
 
 handleSleep = () => {
@@ -40,11 +46,13 @@ handleSleep = () => {
   const updateHappiness = this.state.happiness +1;
   const updateFullness = this.state.fullness -2;
   this.setState(
-    {energy: updateEnergy,
+    {
+      energy: updateEnergy,
       happiness: updateHappiness,
-      fullness: updateFullness
+      fullness: updateFullness,
+      display: bunnySleep
     }
-  )
+  );
 }
 
 handleFeed = () => {
@@ -52,11 +60,13 @@ handleFeed = () => {
   const updateHappiness = this.state.happiness +2;
   const updateFullness = this.state.fullness +4;
   this.setState(
-    {energy: updateEnergy,
+    {
+      energy: updateEnergy,
       happiness: updateHappiness,
-      fullness: updateFullness
+      fullness: updateFullness,
+      display: bunnyEat
     }
-  )
+  );
 }
 
 handlePlay = () => {
@@ -64,12 +74,15 @@ handlePlay = () => {
   const updateHappiness = this.state.happiness +4;
   const updateFullness = this.state.fullness -2;
   this.setState(
-    {energy: updateEnergy,
+    {
+      energy: updateEnergy,
       happiness: updateHappiness,
-      fullness: updateFullness
+      fullness: updateFullness,
+      display: bunnyPlay
     }
-  )
+  );
 }
+
 
 render() {
   return (
@@ -82,7 +95,7 @@ render() {
 
     <Row>
     <Col md={8} className='frame left'>
-    <Display />
+    <Display display={this.state.display} />
     </Col>
 
     <Col md={4} className='frame right'>
