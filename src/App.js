@@ -9,6 +9,7 @@ import bunnyBooty from './img/bunnyBooty.png';
 import bunnySleep from './img/bunnySleep.png';
 import bunnyEat from './img/bunnyEat.png';
 import bunnyPlay from './img/bunnyPlay.png';
+import bunnyIdle from './img/bunnyIdle.png';
 
 class App extends React.Component {
   constructor() {
@@ -22,16 +23,16 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    this.waitTimeUpdateTimer = setInterval(() =>
+    let updateStats = setInterval(() =>
     this.updateStatsByTime(),
     3000
   );
 }
 
 updateStatsByTime = () => {
-  const updateEnergy = this.state.energy -1;
-  const updateHappiness = this.state.happiness -1;
-  const updateFullness = this.state.fullness -1;
+  const updateEnergy = this.state.energy -(Math.floor(Math.random() * 4));
+  const updateHappiness = this.state.happiness -(Math.floor(Math.random() * 4));
+  const updateFullness = this.state.fullness -(Math.floor(Math.random() * 4));
   this.setState(
     {
       energy: updateEnergy,
